@@ -7,16 +7,25 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>reverse-http-client</artifactId>
+    <artifactId>reverse-http-gateway</artifactId>
     <packaging>jar</packaging>
-    <name>Jetty :: Reverse HTTP :: Client</name>
+    <name>Jetty :: Reverse HTTP :: Gateway</name>
 
     <properties>
-        <bundle-symbolic-name>${project.groupId}.rhttp.client</bundle-symbolic-name>
+        <bundle-symbolic-name>${project.groupId}.rhttp.gateway</bundle-symbolic-name>
     </properties>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                  <mainClass>org.mortbay.jetty.rhttp.gateway.Main</mainClass>
+                  <arguments>
+                  </arguments>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
@@ -52,7 +61,12 @@
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
+            <artifactId>reverse-http-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
@@ -60,36 +74,26 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-http</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip-annotations</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-          <groupId>org.eclipse.jetty.toolchain</groupId>
-          <artifactId>jetty-test-helper</artifactId>
-          <scope>test</scope>
+            <artifactId>jetty-continuation</artifactId>
+            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.toolchain</groupId>
+            <artifactId>jetty-test-helper</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>

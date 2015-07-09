@@ -78,7 +78,7 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>example-jetty-embedded</artifactId>
-      <version>${project.version}</version>
+      <version>${jetty.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
